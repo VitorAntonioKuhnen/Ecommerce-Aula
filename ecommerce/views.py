@@ -1,7 +1,11 @@
 from django.shortcuts import render
 from .models import Produto
 
+
 def inicio(request):
+    return render(request, 'inicio/index.html')
+
+def dashboard(request):
     valorTot = 0
     qtd = 0
     for pd in Produto.objects.all():

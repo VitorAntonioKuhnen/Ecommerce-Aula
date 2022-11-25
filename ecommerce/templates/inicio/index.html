@@ -1,0 +1,255 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>E-commerce | Estilo é Para Poucos</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/inicio/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<body>
+
+    <div class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <a href="index.html"><img src="" width="125px">LOGO</a>
+                </div>
+                <nav>
+                    <ul id="MenuItems">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Categorias</a></li>
+                        <li><a href="">Sobre</a></li>
+                        <li><a href="">Contatos</a></li>
+                        <li><a href="accountpage.html">Conta</a></li>
+                    </ul>
+                </nav>
+                <a href="cart.html"><img src="images/cart.png" width="30px" height="30px"></a>
+                <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <h1>Onde todo mundo quer... <br> Onde todo mundo pode usar</h1>
+                    <p>Melhor que encontrar o par perfeito, é encontrar vários!! </p>
+                    <a href="" class="btn">Explore agora!</a>
+                </div>
+                <div class="col-2">
+                    <img src="{% static 'images/tenisImg.png' %}">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+
+    <!------------------- destaque produtos ------------------->
+    <div class="small-container">
+        <h2 class="title">Produtos Destaques</h2>
+        <div class="row">
+            <div class="col-4">
+                <a href="productdetail.html"><img src="images/product-2.jpg"></a>
+                <a href="productdetail.html">
+                    <h4>Black Sneakers</h4>
+                </a>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <p>$50.00</p>
+            </div>
+
+            <div class="col-4">
+                <img src="images/product-2.jpg">
+                <h4>Black Sneakers</h4>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <p>$50.00</p>
+            </div>
+
+            <div class="col-4">
+                <img src="images/product-2.jpg">
+                <h4>Black Sneakers</h4>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <p>$50.00</p>
+            </div>
+
+            <div class="col-4">
+                <img src="images/product-2.jpg">
+                <h4>Black Sneakers</h4>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p>$50.00</p>
+            </div>
+        </div>
+
+        <h2 class="title">Outros Produtos</h2>
+        <div class="row">
+            <div class="col-4">
+                <img src="images/product-5.jpg">
+                <h4>Hi-Top Sneakers</h4>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <p>$50.00</p>
+            </div>
+
+            <div class="col-4">
+                <img src="images/product-2.jpg">
+                <h4>Black Tiger</h4>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <p>$50.00</p>
+            </div>
+
+            <div class="col-4">
+                <img src="images/product-7.jpg">
+                <h4>Black/White Socks</h4>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <p>$50.00</p>
+            </div>
+
+            <div class="col-4">
+                <img src="images/product-10.jpg">
+                <h4>Hi-Top Sneakers</h4>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p>$50.00</p>
+            </div>
+        </div>
+
+       
+        </div>
+    </div>
+
+
+  
+    <!-----------------------------------brands----------------------------->
+
+    <div class="brands">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-5">
+                    <img src="images/logo-paypal.png">
+                </div>
+    
+                <div class="brands">
+                    <div class="small-container">
+                        <div class="row">
+                            <div class="col-5">
+                                <img src="images/logo-paypal.png">
+                            </div>
+    
+                
+
+
+
+    <!--------------------------------------footer---------------------------->
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3>Download App</h3>
+                    <p>Download App Para Android e ios mobile phone.</p>
+                    <div class="app-logo">
+                        <img src="images/play-store.png">
+                        <img src="images/app-store.png">
+                    </div>
+                </div>
+
+
+                <div class="footer-col-3">
+                    <h3>Links</h3>
+                    <ul>
+                        <li>Cupons</li>
+                        <li>Blog</li>
+                        <li>Politica de Privacidade</li>
+                        <li>Seja um afiliado</li>
+                    </ul>
+                </div>
+
+                <div class="footer-col-4">
+                    <h3>Redes Sociais</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Instagram</li>
+                        <li>Youtube</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="Copyright">Copyright 2022 - E-Commerce WebSite</p>
+        </div>
+    </div>
+
+    <!-------------------------js menu------------------->
+
+    <script>
+        var MenuItems = document.getElementById("MenuItems")
+
+        MenuItems.style.maxHeight = "0px";
+
+        function menutoggle() {
+            if (MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px"
+            } else
+
+            {
+                MenuItems.style.maxHeight = "0px";
+
+            }
+
+
+        }
+    </script>
+
+
+
+</body>
+
+</html>
