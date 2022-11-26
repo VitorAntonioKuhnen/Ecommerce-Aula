@@ -28,7 +28,7 @@
                         <li><a href="accountpage.html">Conta</a></li>
                     </ul>
                 </nav>
-                <a href="cart.html"><img src="images/cart.png" width="30px" height="30px"></a>
+                <a href="cart.html"><img src="{% static 'images/cart.png' %}" width="30px" height="30px"></a>
                 <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
             </div>
             <div class="row">
@@ -47,14 +47,15 @@
     <br>
     <br>
 
-    <!------------------- destaque produtos ------------------->
+    {% comment %} <!- destaque produtos -> {% endcomment %}
     <div class="small-container">
         <h2 class="title">Produtos Destaques</h2>
         <div class="row">
+            {% for destaque in destaq %}
             <div class="col-4">
-                <a href="productdetail.html"><img src="images/product-2.jpg"></a>
-                <a href="productdetail.html">
-                    <h4>Black Sneakers</h4>
+                <a href="#"><img src="{{destaque.produto.endimg.url}}"></a>
+                <a href="#">
+                    <h4>{{destaque.produto.nome}}</h4>
                 </a>
                 <div class="rating">
                     <i class="fas fa-star"></i>
@@ -63,54 +64,17 @@
                     <i class="far fa-star"></i>
                     <i class="far fa-star"></i>
                 </div>
-                <p>$50.00</p>
+                <p>R$ {{destaque.produto.valor}}</p>
             </div>
-
-            <div class="col-4">
-                <img src="images/product-2.jpg">
-                <h4>Black Sneakers</h4>
-                <div class="rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-
-            <div class="col-4">
-                <img src="images/product-2.jpg">
-                <h4>Black Sneakers</h4>
-                <div class="rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-
-            <div class="col-4">
-                <img src="images/product-2.jpg">
-                <h4>Black Sneakers</h4>
-                <div class="rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <p>$50.00</p>
-            </div>
+            {% endfor %}
         </div>
 
         <h2 class="title">Outros Produtos</h2>
         <div class="row">
+            {% for prod in produto %}
             <div class="col-4">
-                <img src="images/product-5.jpg">
-                <h4>Hi-Top Sneakers</h4>
+                <img src="{{prod.endimg.url}}">
+                <h4>{{prod.nome}}</h4>
                 <div class="rating">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -118,73 +82,23 @@
                     <i class="far fa-star"></i>
                     <i class="far fa-star"></i>
                 </div>
-                <p>$50.00</p>
+                <p>R$ {{prod.valor}}</p>
             </div>
-
-            <div class="col-4">
-                <img src="images/product-2.jpg">
-                <h4>Black Tiger</h4>
-                <div class="rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-
-            <div class="col-4">
-                <img src="images/product-7.jpg">
-                <h4>Black/White Socks</h4>
-                <div class="rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-
-            <div class="col-4">
-                <img src="images/product-10.jpg">
-                <h4>Hi-Top Sneakers</h4>
-                <div class="rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-        </div>
-
-       
+            {% endfor %}
+            
         </div>
     </div>
 
 
   
-    <!-----------------------------------brands----------------------------->
+    {% comment %} <!-brands-> {% endcomment %}
 
     <div class="brands">
         <div class="small-container">
             <div class="row">
                 <div class="col-5">
-                    <img src="images/logo-paypal.png">
+                    <img src="{% static 'images/logo-paypal.png' %}">
                 </div>
-    
-                <div class="brands">
-                    <div class="small-container">
-                        <div class="row">
-                            <div class="col-5">
-                                <img src="images/logo-paypal.png">
-                            </div>
-    
-                
-
 
 
     <!--------------------------------------footer---------------------------->
@@ -196,8 +110,8 @@
                     <h3>Download App</h3>
                     <p>Download App Para Android e ios mobile phone.</p>
                     <div class="app-logo">
-                        <img src="images/play-store.png">
-                        <img src="images/app-store.png">
+                        <img src="{% static 'images/play-store.png' %}">
+                        <img src="{% static 'images/app-store.png' %}">
                     </div>
                 </div>
 

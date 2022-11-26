@@ -23,6 +23,8 @@ class MarcaAdmin(admin.ModelAdmin):
 
 admin.site.register(Marca, MarcaAdmin)    
 
+admin.site.register(Prod_Destaque)    
+
 admin.site.register(Carrinho)
 
 admin.site.register(Hist_Carrinho)
