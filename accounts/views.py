@@ -12,13 +12,16 @@ def login(request):
 
         if check is not None:
             auth.login(request, check)
-            print(check)
-            return redirect('inicio')
+
+            if request.user.is_superuser:
+                return redirect('dashboard')
+            else:    
+                return redirect('inicio')
         else:
             messages.error(request, 'Usuario ou Senha Incorreto!!')
             return redirect('login')
     else:
-        return render(request, 'login/index.html')
+        return render(request, 'log_cad/index.html')
 
 
 def logout(request):
@@ -68,4 +71,4 @@ def cadastro(request):
                 request, 'É necessario informar o Primeiro Nome!!')
             return redirect('cadastro')
     else:
-        return render(request, 'cadastro.html')
+        return render(request, 'clientes/log_cad/index.html')

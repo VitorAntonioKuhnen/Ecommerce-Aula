@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/log_cad/style.css' %}">
+</head>
+
+<body>
+    <div class="col"></div>
+    <div class="form-container">
+        <div class="form-btn">
+            <span onclick="login()">Login</span>
+            <span onclick="register()">Cadastro</span>
+            <hr id="Indicador" style=transform:translateX(0px);>
+        </div>
+        <form id="LoginForm" style="transform:translateX(300px);">
+            <input name="usuario" type="text" placeholder="Usuário">
+            <input name="senha" type="password" placeholder="Senha">
+            <button type="submit" class="btn">Entrar</button>
+            <a href>Esqueci a senha</a>
+        </form>
+        <form id="cadForm" style="transform: translateX(300px);">
+            <input type="text" placeholder="Usuário">
+            <input type="email" placeholder="E-mail">
+            <input type="password" placeholder="Senha">
+            <button type="submit" class="btn">Cadastrar</button>
+        </form>
+
+        <script>
+            var MenuItems = document.getElementById("MenuItems")
+
+            MenuItems.style.maxHeight = "0px";
+
+            function menutoggle() {
+                if (MenuItems.style.maxHeight == "0px") {
+                    MenuItems.style.maxHeight = "200px"
+                } else {
+                    MenuItems.style.maxHeight = "0px";
+
+                }
+
+            }
+        </script>
+
+        <script>
+            var LoginForm = document.getElementById("LoginForm");
+            var cadForm = document.getElementById("cadForm");
+            var Indicador = document.getElementById("Indicador");
+
+            function register() {
+
+                cadForm.style.transform = "translateX(0px)";
+                LoginForm.style.transform = "translateX(0px)";
+                Indicador.style.transform = "translateX(100px)";
+            }
+
+            function login() {
+
+                cadForm.style.transform = "translateX(300px)";
+                LoginForm.style.transform = "translateX(300px)";
+                Indicador.style.transform = "translateX(0px)";
+            }
+        </script>
+
+
+
+
+    </div>
+</body>
+
+</html>
