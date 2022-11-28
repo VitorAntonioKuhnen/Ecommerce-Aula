@@ -18,7 +18,7 @@
             <span onclick="register()">Cadastro</span>
             <hr id="Indicador" style=transform:translateX(0px);>
         </div>
-        <form id="LoginForm" style="transform:translateX(300px);">
+        <form id="LoginForm" style="transform:translateX(300px);" action="#" method="POST">  {% csrf_token %}
             <input name="usuario" type="text" placeholder="Usuário">
             <input name="senha" type="password" placeholder="Senha">
             <button type="submit" class="btn">Entrar</button>
