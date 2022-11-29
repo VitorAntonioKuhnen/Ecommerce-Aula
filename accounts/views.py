@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 
 def login(request):
-    if request.method == 'POST':
+    if "login" in request.POST:
         usuario = request.POST.get('usuario')
         senha = request.POST.get('senha')
         check = auth.authenticate(request, username=usuario, password=senha)
@@ -15,36 +15,24 @@ def login(request):
 
             if request.user.is_superuser:
                 return redirect('dashboard')
-            else:    
+            else:
                 return redirect('inicio')
         else:
             messages.error(request, 'Usuario ou Senha Incorreto!!')
             return redirect('login')
-    else:
-        return render(request, 'log_cad/index.html')
-
-
-def logout(request):
-    auth.logout(request)
-    return redirect('login')
-
-
-def cadastro(request):
-    if request.method == 'POST':
-        primeiroNome = request.POST.get('primeiroNome').strip()
-        ultimoNome = request.POST.get('ultimoNome').strip()
+    elif "cadastro" in request.POST:
+        nome = request.POST.get('nome').strip()
         email = request.POST.get('email').strip()
         usuario = request.POST.get('usuario').strip()
         senha = request.POST.get('senha')
-        senha_2 = request.POST.get('comfirmaSenha')
-        if len(primeiroNome) is not NULL:
-            if len(ultimoNome) is not NULL:
+        senha_2 = request.POST.get('senha_2')
+        if len(nome) is not NULL:
                 if len(email) is not NULL:
                     if len(usuario) >= 3:
                         if senha == senha_2:
                             if len(senha) >= 5 and len(senha) <= 12:
                                 User.objects.create_user(
-                                    username=usuario, password=senha, first_name=primeiroNome, last_name=ultimoNome, email=email)
+                                    username=usuario, password=senha, first_name=nome , email=email)
                                 return redirect('login')
                             else:
                                 messages.error(
@@ -62,13 +50,14 @@ def cadastro(request):
                     messages.error(
                         request, 'É necessario informar um Email!!')
                     return redirect('cadastro')
-            else:
-                messages.error(
-                    request, 'É necessario informar o Ultimo Nome!!')
-                return redirect('cadastro')
         else:
             messages.error(
                 request, 'É necessario informar o Primeiro Nome!!')
             return redirect('cadastro')
     else:
-        return render(request, 'clientes/log_cad/index.html')
+        return render(request, 'log_cad/index.html')
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect('login')

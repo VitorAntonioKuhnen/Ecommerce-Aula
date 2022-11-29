@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Produto, Prod_Destaque
+from .models import Produto, Prod_Destaque, Carrinho
 from django.contrib.auth.decorators import login_required
 
 
@@ -19,3 +19,10 @@ def dashboard(request):
 def estoque(request):
     produtos = Produto.objects.all()
     return render(request, 'admins/estoque/index.html',{'produtos':produtos})
+
+def carrinho(request):
+    carrinhos = Carrinho.objects.filter(usuario = request.user.id)
+    valor = 0
+    for carrinho in carrinhos:
+        valor += carrinho.produto.preco * carrinho.qtd_Prod
+    return render(request, 'clientes/carrinho/index.html',{'carrinhos':carrinhos, 'valor':valor})    

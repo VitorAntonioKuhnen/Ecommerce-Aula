@@ -1,0 +1,134 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="{% static 'carrinho/assets/bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'carrinho/assets/custom/css/style.css' %}">
+
+    <title>Ecommerce</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-primary navbar-expand-lg">
+        <a class="navbar-brand" href="index.html">Sacola</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link nav-cart-link active" href="#">
+                        <span class="nav-cart-text mr-1">
+                            Carrinho
+                        </span>
+                        <span class="nav-cart-count mr-1">
+                            <strong>Finalizar</strong>
+                        </span>
+                        <span class="nav-cart-icon mr-2">
+                            <i class="fas fa-shopping-cart"></i>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Search">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Pesquisar</button>
+            </form>
+        </div>
+    </nav>
+
+    <main class="container mt-4 mb-4">
+        <div class="row">
+            <div class="col">
+                <h3>Escolha o método de pagamento</h3>
+                <p><b> Resumo da Compra </b></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+
+                <div class="row mt-4">
+                    <div class="col-lg-2 font-weight-bold">Número do pedido:</div>
+                    <div class="col-lg-4">001</div>
+                    <div class="col-lg-2 font-weight-bold">Total a pagar:</div>
+                    <div class="col-lg-4">R$ {{valor}}</div>
+
+                    <div class="col-lg-2 font-weight-bold">Qtd.</div>
+                    <div class="col-lg-4">1</div>
+                    <div class="col-lg-2 font-weight-bold">Status:</div>
+                    <div class="col-lg-4">Pendente</div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col">
+                        <h3>Compras</h3>
+                    </div>
+                </div>
+
+                <div class="table-responsive mt-3">
+                    <table class="table">
+                        <tr>
+                            <th class="d-none d-lg-block">Produto</th>
+                            <th>Descrição</th>
+                            <th>Qtd.</th>
+                            <th>Preço Unitário</th>
+                        </tr>
+
+                        {% for carrinho in carrinhos %}
+                        <tr>
+                            <td class="d-none d-lg-block">
+                                <img class="cart-img" src="imgs/background-red-retro-model-tennis.jpg">
+                            </td>
+                            <td>{{carrinho.produto.nome}} <br> {{carrinho.produto.tamanho}}</td>
+                            <td>{{carrinho.qtd_Prod}}</td>
+                            <td>R$ {{carrinho.produto.preco}}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    <hr>
+                </div>
+
+
+                <div class="row mt-4">
+                    <div class="col">
+                        <a href="#" class="btn btn-primary btn-block btn-lg">Finalizar Compra</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="container-fluid bg-primary">
+        <div class="container text-light">
+            <div class="row">
+                <div class="col">
+                    <div class="p-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-check-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zm-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+                          </svg>
+                        <span class="align-middle p-1">Compra 100% segura</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/bootstrap/js/jquery-3.2.1.slim.min.js"></script>
+    <script src="assets/bootstrap/js/popper.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script defer src="assets/font-awesome/js/all.js"></script>
+    <script src="assets/custom/js/scripts.js"></script>
+</body>
+
+</html>
