@@ -31,3 +31,7 @@ def produto(request, id):
     produto = Produto.objects.get(id=id)
     parcela = '{:.2f}'.format(produto.valor/12)
     return render(request, 'clientes/produto/index.html', {'produto':produto, 'parcela':parcela})    
+
+def categorias(request):
+    produtos = Produto.objects.all()
+    return render(request, 'clientes/categorias/index.html', {'produtos':produtos})   

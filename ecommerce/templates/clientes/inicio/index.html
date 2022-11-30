@@ -18,12 +18,12 @@
         <div class="container">
             <div class="navbar">
                 <div class="logo">
-                    <a href="index.html"><img src="" width="125px">LOGO</a>
+                    <a href="{% url 'inicio' %}"><img src="" width="125px">LOGO</a>
                 </div>
                 <nav>
                     <ul id="MenuItems">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="products.html">Categorias</a></li>
+                        <li><a href="{% url 'inicio' %}">Home</a></li>
+                        <li><a href="{% url 'categorias' %}">Categorias</a></li>
                         <li><a href="">Sobre</a></li>
                         <li><a href="">Contatos</a></li>
                         <li><a href="accountpage.html">Conta</a></li>
