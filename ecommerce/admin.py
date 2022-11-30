@@ -27,6 +27,9 @@ admin.site.register(Prod_Destaque)
 
 admin.site.register(Carrinho)
 
+admin.site.register(Tamanhos)
+
+
 admin.site.register(Hist_Carrinho)
 admin.site.register(Hist_Produto)
 admin.site.register(Compra_Fornecedor)

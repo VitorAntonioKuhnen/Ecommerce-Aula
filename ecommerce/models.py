@@ -23,12 +23,12 @@ class Hist_Produto(models.Model):
     def __str__(self):
         return self.movimentacao  
 
-class Compra_Fornecedor(models.Model):
-    qtd_entrada = models.IntegerField()
-    valor = models.FloatField()
-    dataEnt = models.DateField()
-    horaEnt = models.TimeField()    
-    
+
+
+class Tamanhos(models.Model):
+    tamanhos = models.IntegerField()
+    def __str__(self):
+        return str(self.tamanhos)    
 
 class Produto(models.Model):
     nome = models.CharField(max_length=255)
@@ -37,13 +37,21 @@ class Produto(models.Model):
     valor = models.FloatField()
     tamanho = models.CharField(max_length=2)
     endimg = models.ImageField(upload_to='Produto_img/%Y/%m/%d')
-    compra_fornecedor = models.ForeignKey(Compra_Fornecedor, on_delete=models.DO_NOTHING)
+    tamanho = models.ForeignKey(Tamanhos, on_delete=models.DO_NOTHING)
     hist_produto = models.ForeignKey(Hist_Produto, on_delete=models.DO_NOTHING, blank=True, null=True)
     categoria = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING)
     marca = models.ForeignKey(Marca, on_delete=models.DO_NOTHING)
 
     def __str__(self):
         return self.nome
+
+class Compra_Fornecedor(models.Model):
+    nmFornece = models.CharField(max_length=255)
+    qtd_entrada = models.IntegerField()
+    valor = models.FloatField()
+    dataEnt = models.DateField()
+    horaEnt = models.TimeField()   
+    produto = models.ForeignKey(Produto, on_delete=models.DO_NOTHING)
 
 
 class Prod_Destaque(models.Model):

@@ -1,0 +1,62 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: poppins, sans-serif;
+}
+
+body {
+    /* background-color: #f1f1f1; */
+    display: flex;
+    justify-content: center;
+  
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+ul {
+    list-style: none;
+  
+}
+
+img {
+ 
+  width:100%;
+  height: 50%;
+}
+  
+.container-2 {
+    margin: 30px 10px 20px 8px;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly
+  
+}
+
+hr {
+    width: 100%;
+    margin-bottom: 10px;
+    color: #5bce5d;
+    
+}
+  
+.btn-comprar {
+  background-color: #5bce5d;
+  border: none;
+  height: 3rem;
+  margin-top: 20px;
+    
+    
+}
+
+.btn-sacola {
+  background-color: #606360;
+  border: none;
+}
+
+.btn-toolbar {
+  padding: 0;
+}

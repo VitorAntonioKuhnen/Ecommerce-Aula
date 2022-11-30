@@ -26,3 +26,8 @@ def carrinho(request):
     for carrinho in carrinhos:
         valor += carrinho.produto.preco * carrinho.qtd_Prod
     return render(request, 'clientes/carrinho/index.html',{'carrinhos':carrinhos, 'valor':valor})    
+
+def produto(request, id):
+    produto = Produto.objects.get(id=id)
+    parcela = '{:.2f}'.format(produto.valor/12)
+    return render(request, 'clientes/produto/index.html', {'produto':produto, 'parcela':parcela})    

@@ -5,7 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <title>E-commerce | Estilo é Para Poucos</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/inicio/style.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,119 +49,117 @@
     <br>
 
     {% comment %} <!- destaque produtos -> {% endcomment %}
-    <div class="small-container">
-        <h2 class="title">Produtos Destaques</h2>
-        <div class="row">
-            {% for destaque in destaq %}
-            <div class="col-4">
-                <a href="#"><img src="{{destaque.produto.endimg.url}}"></a>
-                <a href="#">
-                    <h4>{{destaque.produto.nome}}</h4>
-                </a>
-                <div class="rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
-                <p>R$ {{destaque.produto.valor}}</p>
-            </div>
-            {% endfor %}
-        </div>
-
-        <h2 class="title">Outros Produtos</h2>
-        <div class="row">
-            {% for prod in produto %}
-            <div class="col-4">
-                <img src="{{prod.endimg.url}}">
-                <h4>{{prod.nome}}</h4>
-                <div class="rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
-                <p>R$ {{prod.valor}}</p>
-            </div>
-            {% endfor %}
-            
-        </div>
-    </div>
-
-
-  
-    {% comment %} <!-brands-> {% endcomment %}
-
-    <div class="brands">
         <div class="small-container">
+            <h2 class="title">Produtos Destaques</h2>
             <div class="row">
-                <div class="col-5">
-                    <img src="{% static 'images/logo-paypal.png' %}">
+                {% for destaque in destaq %}
+                <div class="col-4">
+                    <a href="{% url 'produto' destaque.produto.id %}" class="col-4">
+                        <img src="{{destaque.produto.endimg.url}}">
+                        <h4>{{destaque.produto.nome}}</h4>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <p>R$ {{destaque.produto.valor}}</p>
+                    </a>
                 </div>
-
-
-    <!--------------------------------------footer---------------------------->
-
-    <div class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="footer-col-1">
-                    <h3>Download App</h3>
-                    <p>Download App Para Android e ios mobile phone.</p>
-                    <div class="app-logo">
-                        <img src="{% static 'images/play-store.png' %}">
-                        <img src="{% static 'images/app-store.png' %}">
-                    </div>
-                </div>
-
-
-                <div class="footer-col-3">
-                    <h3>Links</h3>
-                    <ul>
-                        <li>Cupons</li>
-                        <li>Blog</li>
-                        <li>Politica de Privacidade</li>
-                        <li>Seja um afiliado</li>
-                    </ul>
-                </div>
-
-                <div class="footer-col-4">
-                    <h3>Redes Sociais</h3>
-                    <ul>
-                        <li>Facebook</li>
-                        <li>Twitter</li>
-                        <li>Instagram</li>
-                        <li>Youtube</li>
-                    </ul>
-                </div>
+                {% endfor %}
             </div>
-            <hr>
-            <p class="Copyright">Copyright 2022 - E-Commerce WebSite</p>
+
+            <h2 class="title">Outros Produtos</h2>
+            <div class="row">
+                {% for prod in produto %}
+                <a href="{% url 'produto' prod.id %}" class="col-4">
+                    <img src="{{prod.endimg.url}}">
+                    <h4>{{prod.nome}}</h4>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <p>R$ {{prod.valor}}</p>
+                    </div>
+                </a>
+                {% endfor %}
+
+            </div>
         </div>
-    </div>
-
-    <!-------------------------js menu------------------->
-
-    <script>
-        var MenuItems = document.getElementById("MenuItems")
-
-        MenuItems.style.maxHeight = "0px";
-
-        function menutoggle() {
-            if (MenuItems.style.maxHeight == "0px") {
-                MenuItems.style.maxHeight = "200px"
-            } else
-
-            {
-                MenuItems.style.maxHeight = "0px";
-
-            }
 
 
-        }
-    </script>
+
+        {% comment %} <!-brands-> {% endcomment %}
+
+            <div class="brands">
+                <div class="small-container">
+                    <div class="row">
+                        <div class="col-5">
+                            <img src="{% static 'images/logo-paypal.png' %}">
+                        </div>
+
+
+                        <!--------------------------------------footer---------------------------->
+
+                        <div class="footer">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="footer-col-1">
+                                        <h3>Download App</h3>
+                                        <p>Download App Para Android e ios mobile phone.</p>
+                                        <div class="app-logo">
+                                            <img src="{% static 'images/play-store.png' %}">
+                                            <img src="{% static 'images/app-store.png' %}">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="footer-col-3">
+                                        <h3>Links</h3>
+                                        <ul>
+                                            <li>Cupons</li>
+                                            <li>Blog</li>
+                                            <li>Politica de Privacidade</li>
+                                            <li>Seja um afiliado</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="footer-col-4">
+                                        <h3>Redes Sociais</h3>
+                                        <ul>
+                                            <li>Facebook</li>
+                                            <li>Twitter</li>
+                                            <li>Instagram</li>
+                                            <li>Youtube</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <hr>
+                                <p class="Copyright">Copyright 2022 - E-Commerce WebSite</p>
+                            </div>
+                        </div>
+
+                        <!-------------------------js menu------------------->
+
+                        <script>
+                            var MenuItems = document.getElementById("MenuItems")
+
+                            MenuItems.style.maxHeight = "0px";
+
+                            function menutoggle() {
+                                if (MenuItems.style.maxHeight == "0px") {
+                                    MenuItems.style.maxHeight = "200px"
+                                } else {
+                                    MenuItems.style.maxHeight = "0px";
+
+                                }
+
+
+                            }
+                        </script>
 
 
 
