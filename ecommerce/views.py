@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from .models import Produto, Prod_Destaque, Carrinho
+from .models import Produto, Prod_Destaque, Carrinho, Categoria
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 
 def inicio(request):
@@ -33,5 +34,12 @@ def produto(request, id):
     return render(request, 'clientes/produto/index.html', {'produto':produto, 'parcela':parcela})    
 
 def categorias(request):
+    categoria = Categoria.objects.raw('select * from ecommerce_categoria limit 3')
     produtos = Produto.objects.all()
-    return render(request, 'clientes/categorias/index.html', {'produtos':produtos})   
+    return render(request, 'clientes/categorias/index.html', {'produtos':produtos, 'categoria':categoria})   
+
+def buscar(request):
+    categoria = Categoria.objects.raw('select * from ecommerce_categoria limit 3')
+    busca = request.GET.get('pesquisa')
+    produtos = Produto.objects.filter(Q(nome__icontains=busca) | Q(descricao__icontains=busca))
+    return render(request, 'clientes/categorias/index.html', {'produtos':produtos, 'categoria':categoria})          
