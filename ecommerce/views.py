@@ -22,10 +22,11 @@ def estoque(request):
     return render(request, 'admins/estoque/index.html',{'produtos':produtos})
 
 def carrinho(request):
-    carrinhos = Carrinho.objects.filter(usuario = request.user.id)
+    carrinhos = Carrinho.objects.filter(Q(usuario = request.user.id) & Q(status = 'A'))
     valor = 0
-    for carrinho in carrinhos:
-        valor += carrinho.produto.preco * carrinho.qtd_Prod
+    for carrinho in carrinhos.produto:
+        print(carrinho.id)
+        valor += carrinho.preco * Hist_Produto.objects.get(Q(usuario_id = request.user.id) & Q(produto_id = carrinho.produto.id) & Q(carrinho = 'A'))  #Precisa ser ajustado
     return render(request, 'clientes/carrinho/index.html',{'carrinhos':carrinhos, 'valor':valor})    
 
 def produto(request, id):
@@ -50,19 +51,10 @@ def adicionaCart(request, id):
     user = request.user.id
     cart = Carrinho.objects.filter(usuario_id=user, status = 'A') 
     pega_Produto = Produto.objects.get(id=id)
-
     if cart:
-       
-        hist_prod = Hist_Produto.objects.filter(Q(usuario_id = user) & Q(produto_id = pega_Produto.id) & Q(carrinho='A'))
-        # hist_prod = Hist_Produto.objects.filter(usuario_id = user, produto_id = pega_Produto.id, carrinho='A')
-
-        for pr in hist_prod:
-            pr.qtd +=1
-            pr.save()
-            print(pr.qtd)
-            
+        hist_prod = Hist_Produto.objects.get(Q(usuario_id = user) & Q(produto_id = pega_Produto.id) & Q(carrinho='A'))
         hist_prod.qtd +=1
-        hist_prod.save()
+        hist_prod.save() 
         cart = Carrinho.objects.get(usuario_id = user)
         cart.produto.add(pega_Produto)
     else:   
