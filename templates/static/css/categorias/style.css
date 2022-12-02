@@ -45,6 +45,6 @@ h5 {
     transform: translatey(-5px);
 }
 
-img {
+.card-img-top {
     height: 13rem;
 }

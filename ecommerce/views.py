@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from .models import Produto, Prod_Destaque, Carrinho, Categoria
+from django.shortcuts import render,redirect
+from .models import Produto, Prod_Destaque, Carrinho, Categoria, Hist_Produto
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
@@ -30,8 +30,9 @@ def carrinho(request):
 
 def produto(request, id):
     produto = Produto.objects.get(id=id)
+    categoria = Categoria.objects.raw('select * from ecommerce_categoria limit 3')
     parcela = '{:.2f}'.format(produto.valor/12)
-    return render(request, 'clientes/produto/index.html', {'produto':produto, 'parcela':parcela})    
+    return render(request, 'clientes/produto/index.html', {'produto':produto, 'parcela':parcela, 'categoria':categoria})    
 
 def categorias(request):
     categoria = Categoria.objects.raw('select * from ecommerce_categoria limit 3')
@@ -43,3 +44,30 @@ def buscar(request):
     busca = request.GET.get('pesquisa')
     produtos = Produto.objects.filter(Q(nome__icontains=busca) | Q(descricao__icontains=busca))
     return render(request, 'clientes/categorias/index.html', {'produtos':produtos, 'categoria':categoria})          
+
+
+def adicionaCart(request, id):
+    user = request.user.id
+    cart = Carrinho.objects.filter(usuario_id=user, status = 'A') 
+    pega_Produto = Produto.objects.get(id=id)
+
+    if cart:
+       
+        hist_prod = Hist_Produto.objects.filter(Q(usuario_id = user) & Q(produto_id = pega_Produto.id) & Q(carrinho='A'))
+        # hist_prod = Hist_Produto.objects.filter(usuario_id = user, produto_id = pega_Produto.id, carrinho='A')
+
+        for pr in hist_prod:
+            pr.qtd +=1
+            pr.save()
+            print(pr.qtd)
+            
+        hist_prod.qtd +=1
+        hist_prod.save()
+        cart = Carrinho.objects.get(usuario_id = user)
+        cart.produto.add(pega_Produto)
+    else:   
+        Hist_Produto.objects.create(produto_id = pega_Produto.id, valor_uni=pega_Produto.valor, qtd=1, usuario_id=user, movimentacao='E', carrinho='A')
+        add_Carrinho = Carrinho.objects.create(usuario_id=user, status='A')
+        add_Carrinho.produto.add(pega_Produto)
+
+    return redirect(produto, id)

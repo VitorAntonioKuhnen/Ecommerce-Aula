@@ -1,18 +1,18 @@
+{% extends 'base.html' %}
 {% load static %}
-<!doctype html>
-<html lang="pt-br">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    {% block titulo %}Carrinho{% endblock  %}
+    {% block link %}
     <link rel="stylesheet" href="{% static 'carrinho/assets/bootstrap/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'carrinho/assets/custom/css/style.css' %}">
+    <script src="assets/bootstrap/js/jquery-3.2.1.slim.min.js"></script>
+    <script src="assets/bootstrap/js/popper.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script defer src="assets/font-awesome/js/all.js"></script>
+    <script src="assets/custom/js/scripts.js"></script>
+    {% endblock  %}
 
-    <title>Ecommerce</title>
-</head>
-
-<body>
+    {% block conteudo %}
     <nav class="navbar navbar-dark bg-primary navbar-expand-lg">
         <a class="navbar-brand" href="index.html">Sacola</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -37,8 +37,8 @@
                     </a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Search">
+            <form class="form-inline my-2 my-lg-0" action="{% url 'buscar' %}" method="GET">
+                <input class="form-control mr-sm-2" name="pesquisa" type="search" placeholder="Pesquisar" aria-label="Search">
                 <button class="btn btn-secondary my-2 my-sm-0" type="submit">Pesquisar</button>
             </form>
         </div>
@@ -123,11 +123,4 @@
         </div>
     </footer>
 
-    <script src="assets/bootstrap/js/jquery-3.2.1.slim.min.js"></script>
-    <script src="assets/bootstrap/js/popper.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script defer src="assets/font-awesome/js/all.js"></script>
-    <script src="assets/custom/js/scripts.js"></script>
-</body>
-
-</html>
+    {% endblock  %}
