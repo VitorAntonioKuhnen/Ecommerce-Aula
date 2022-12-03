@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from .models import Produto, Prod_Destaque, Carrinho, Categoria, Hist_Produto
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-
+from django.db.models import Sum 
 
 def inicio(request):
     return render(request, 'clientes/inicio/index.html', {'produto':Produto.objects.raw('select * from ecommerce_produto limit 4'), 'destaq':Prod_Destaque.objects.all()})
@@ -24,9 +24,17 @@ def estoque(request):
 def carrinho(request):
     carrinhos = Carrinho.objects.filter(Q(usuario = request.user.id) & Q(status = 'A'))
     valor = 0
-    for carrinho in carrinhos.produto:
-        print(carrinho.id)
-        valor += carrinho.preco * Hist_Produto.objects.get(Q(usuario_id = request.user.id) & Q(produto_id = carrinho.produto.id) & Q(carrinho = 'A'))  #Precisa ser ajustado
+    for carrinho in carrinhos:
+        # print(carrinho.id) #Correto
+        print()
+        for prod in carrinho.produto.all(): #Preciso percorrer minha lista de produtos para somar a quantidade
+            print(prod.id)
+            hist_prod = None
+            hist_prod = Hist_Produto.objects.get(usuario_id = request.user.id, produto_id = prod.id, carrinho = 'A')
+            print('Quantidade')
+            print(hist_prod.valor_uni * hist_prod.qtd)
+
+            valor += hist_prod.valor_uni * hist_prod.qtd #Precisa ser ajustado
     return render(request, 'clientes/carrinho/index.html',{'carrinhos':carrinhos, 'valor':valor})    
 
 def produto(request, id):
@@ -52,11 +60,19 @@ def adicionaCart(request, id):
     cart = Carrinho.objects.filter(usuario_id=user, status = 'A') 
     pega_Produto = Produto.objects.get(id=id)
     if cart:
-        hist_prod = Hist_Produto.objects.get(Q(usuario_id = user) & Q(produto_id = pega_Produto.id) & Q(carrinho='A'))
-        hist_prod.qtd +=1
-        hist_prod.save() 
+        print(pega_Produto.id)
         cart = Carrinho.objects.get(usuario_id = user)
         cart.produto.add(pega_Produto)
+        hist_prod = Hist_Produto.objects.get(Q(usuario_id = user) & Q(produto_id = pega_Produto.id) & Q(carrinho='A'))
+        print(hist_prod)
+        if Hist_Produto.objects.filter(Q(usuario_id = user) & Q(produto_id = pega_Produto.id) & Q(carrinho='A')) is False:
+            Hist_Produto.objects.create(produto_id = pega_Produto.id, valor_uni=pega_Produto.valor, qtd=1, usuario_id=user, movimentacao='E', carrinho='A')
+        else:
+            print('não entrou')
+        # hist_prod = Hist_Produto.objects.get(Q(usuario_id = user) & Q(produto_id = pega_Produto.id) & Q(carrinho='A'))
+        # hist_prod.qtd +=1
+        # hist_prod.save() 
+        
     else:   
         Hist_Produto.objects.create(produto_id = pega_Produto.id, valor_uni=pega_Produto.valor, qtd=1, usuario_id=user, movimentacao='E', carrinho='A')
         add_Carrinho = Carrinho.objects.create(usuario_id=user, status='A')

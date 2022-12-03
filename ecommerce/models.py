@@ -26,7 +26,6 @@ class Produto(models.Model):
     descricao = models.TextField()
     qtd = models.IntegerField()
     valor = models.FloatField()
-    tamanho = models.CharField(max_length=2)
     endimg = models.ImageField(upload_to='Produto_img/%Y/%m/%d')
     tamanho = models.ForeignKey(Tamanhos, on_delete=models.DO_NOTHING)
     categoria = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING)
