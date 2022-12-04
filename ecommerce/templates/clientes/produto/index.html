@@ -104,7 +104,7 @@
               <span class="sr-only">Next</span>
             </a>
           </div>
-          <a href=""><button class="col-12 md-6 btn-comprar">Comprar</button> </a> <br> <br>
+          <a href="{% url 'comprar' produto.id %}"><button class="col-12 md-6 btn-comprar">Comprar</button> </a> <br> <br>
           <a href="{% url 'adicionaCart' produto.id %}"><button class="col-12 md-6 btn-sacola">Adicionar Sacola</button> </a>
         </div>
         <hr>

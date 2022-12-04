@@ -1,115 +1,113 @@
 {% extends 'base.html' %}
 {% load static %}
 
-    {% block titulo %}Produtos{% endblock  %}
-    {% block link %}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,500;0,600;1,600&family=Roboto&display=swap"
-    rel="stylesheet" />
-    <link rel="stylesheet" href="{% static 'css/categorias/style.css' %}">
-    {% endblock  %}
+{% block titulo %}Produtos{% endblock %}
+{% block link %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,500;0,600;1,600&family=Roboto&display=swap"
+  rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'css/categorias/style.css' %}">
+{% endblock %}
 
-    {% block conteudo %}
-    <div class="container justify-content-center justify-content-lg-between">
-      <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5" style="background-color: #929fba">
-        <span class="navbar-brand" href="#">Categorias: </span>
-
-
+{% block conteudo %}
+<div class="container justify-content-center justify-content-lg-between">
+  <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5" style="background-color: #929fba">
+    <span class="navbar-brand" href="#">Categorias: </span>
 
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
-          aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <div class="collapse navbar-collapse" id="basicExampleNav">
 
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Todos
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            {% for categ in categoria %}
-            <li class="nav-item">
-              <a class="nav-link" href="#">{{categ.tpCategoria}}</a>
-            </li>
-            {% endfor %}
-          </ul>
-          <form class="form-inline" action="{% url 'buscar' %}" method="GET">
-            <div class="md-form my-0">
-              <input class="form-control mr-sm-2" name="pesquisa" type="text" placeholder="Pesquisar" aria-label="Search">
-            </div>
-          </form>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+      aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Todos
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        {% for categ in categoria %}
+        <li class="nav-item">
+          <a class="nav-link" href="#">{{categ.tpCategoria}}</a>
+        </li>
+        {% endfor %}
+      </ul>
+      <form class="form-inline" action="{% url 'buscar' %}" method="GET">
+        <div class="md-form my-0">
+          <input class="form-control mr-sm-2" name="pesquisa" type="text" placeholder="Pesquisar" aria-label="Search">
         </div>
-      </nav>
+      </form>
+    </div>
+  </nav>
 
 
 
-      <div class="row d-flex  mb-5 ">
-        {% for produto in produtos %}
-        <a href="{% url 'produto' produto.id %}">
-        <div class="col-lg-3 col-md-6 mb-3">
-          <div class="card" style="width: 16rem">
-            <div class="view overlay">
-              <img class="card-img-top" src="{{produto.endimg.url}}" alt="Card image cap" />
-              <a>
-                <div class="card-body text-center">
-                  <p href="" class="grey-text">Feminino</p>
+  <div class="row d-flex  mb-5 ">
+    {% for produto in produtos %}
+    <a href="{% url 'produto' produto.id %}">
+      <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card" style="width: 16rem">
+          <div class="view overlay">
+            <img class="card-img-top" src="{{produto.endimg.url}}" alt="Card image cap" />
+            <div class="card-body text-center">
+              <p href="" class="grey-text">Feminino</p>
 
-                  <h6>
-                    <strong>
-                      <a href="" class="dark-grey-text">{{produto.nome}}</a>
-                    </strong>
-                  </h6>
+              <h6>
+                <strong>
+                  <a href="" class="dark-grey-text">{{produto.nome}}</a>
+                </strong>
+              </h6>
 
-                  <h5 class="font-weight-bold ">
-                    <strong>R$ {{produto.valor}}</strong>
-                  </h5>
-                </div>
-              </a>
+              <h5 class="font-weight-bold ">
+                <strong>R$ {{produto.valor}}</strong>
+              </h5>
             </div>
           </div>
         </div>
-        </a>
-        {% endfor %}
       </div>
-    </div>
-    </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+</div>
 
 
-  <nav class="d-flex justify-content-center wow fadeIn">
-    <ul class="pagination pg-blue">
+<nav class="d-flex justify-content-center wow fadeIn">
+  <ul class="pagination pg-blue">
 
 
-      <li class="page-item disabled">
-        <a class="page-link" href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-          <span class="sr-only">Previous</span>
-        </a>
-      </li>
+    <li class="page-item disabled">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
 
-      <li class="page-item active">
-        <a class="page-link" href="#">1
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">2</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">3</a>
-      </li>
+    <li class="page-item active">
+      <a class="page-link" href="#">1
+        <span class="sr-only">(current)</span>
+      </a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">2</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">3</a>
+    </li>
 
 
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-          <span class="sr-only">Next</span>
-        </a>
-      </li>
-      {% endblock  %}
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+    {% endblock %}

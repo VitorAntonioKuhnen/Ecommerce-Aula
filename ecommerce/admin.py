@@ -23,13 +23,16 @@ class MarcaAdmin(admin.ModelAdmin):
 
 admin.site.register(Marca, MarcaAdmin)    
 
-admin.site.register(Prod_Destaque)    
+class SacAdmin(admin.ModelAdmin):
+    list_display = ['nome', 'email', 'comentario', 'data', 'hora', 'status']
+    list_display_links = ['nome']
+    search_fields = ['nome', 'email', 'comentario', 'data', 'hora', 'status']
 
-admin.site.register(Carrinho)
-
-admin.site.register(Tamanhos)
-
+admin.site.register(Sac, SacAdmin)
 
 admin.site.register(Hist_Carrinho)
 admin.site.register(Hist_Produto)
 admin.site.register(Compra_Fornecedor)
+admin.site.register(Prod_Destaque)    
+admin.site.register(Carrinho)
+admin.site.register(Tamanhos)

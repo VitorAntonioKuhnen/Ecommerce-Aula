@@ -80,3 +80,14 @@ class Hist_Carrinho(models.Model):
     def __str__(self):
         return self.nmProduto
 
+class Sac(models.Model):
+      nome = models.CharField(max_length=255)
+      email = models.CharField(max_length=255)
+      comentario = models.TextField()    
+      data = models.DateField()
+      hora = models.TimeField()  
+      status = models.CharField(max_length=1) # A para "Aberto" e F para "Finalizado"
+
+      def __str__(self):
+        return self.nome
+

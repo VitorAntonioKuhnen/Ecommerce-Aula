@@ -81,15 +81,15 @@
                             <th>Preço Unitário</th>
                         </tr>
 
-                        {% for carrinho in carrinhos %}
+                        {% for prod in produtos %}
                         <tr>
                             <td class="d-none d-lg-block">
-                                <img class="cart-img" src="{{carrinho.produto.endimg.url}}">
+                                <img class="cart-img" src="{{prod.produto.endimg.url}}">
                             </td>
-                            <td>{{carrinho.produto.nome}} <br> {{carrinho.produto.tamanho}}</td>
-                            <td></td>
+                            <td>{{prod.produto.nome}} <br> Tamanho: {{prod.produto.tamanho}}</td>
+                            <td>{{prod.qtd}}</td>
                             {% comment %} <td>{{carrinho.qtd_Prod}}</td> {% endcomment %}
-                            <td>R$ {{carrinho.produto.preco}}</td>
+                            <td>R$ {{prod.valor_uni}}</td>
                         </tr>
                         {% endfor %}
                     </table>

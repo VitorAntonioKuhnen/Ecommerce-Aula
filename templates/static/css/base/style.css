@@ -63,6 +63,12 @@ p {
     padding-right: 25px;
 }
 
+.navbarHeader>.logo>a, .navbarHeader>nav>ul>li>a{
+    color:black;
+    font-weight: bold;
+
+}
+
 
 /*----------------------------Footer--------------------------*/
 .row {
