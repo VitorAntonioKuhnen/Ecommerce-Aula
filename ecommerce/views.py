@@ -46,7 +46,7 @@ def carrinho(request):
             valor += hist_prod.valor_uni * hist_prod.qtd  # Precisa ser ajustado
 
         
-    return render(request, 'clientes/carrinho/index.html', {'produtos': produtos, 'valor': valor})
+    return render(request, 'clientes/carrinho/index.html', {'produtos': produtos, 'valor': '{:.2f}'.format(valor)})
 
 
 def produto(request, id):
@@ -156,3 +156,17 @@ def perfil(request):
 
 def sacs(request):
     return render(request, 'admins/sacs/index.html', {'sacs':Sac.objects.all()})
+
+def finalizar(request):
+    carrinhos = Carrinho.objects.filter(Q(usuario=request.user.id) & Q(status='A'))
+    for carrinho in carrinhos:
+        for prod in carrinho.produto.all():  # Preciso percorrer minha lista de produtos para somar a quantidade
+            print(prod.id)
+            hist_prod = None
+            hist_prod = Hist_Produto.objects.get(usuario_id=request.user.id, produto_id=prod.id, carrinho='A')
+            produto = Produto.objects.get(id=hist_prod.produto.id)
+            produto.qtd -= hist_prod.qtd
+            hist_prod.carrinho = 'F'
+            produto.save()
+            hist_prod.save()
+    return redirect('carrinho')    

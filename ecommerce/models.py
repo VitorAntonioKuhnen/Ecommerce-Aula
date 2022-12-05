@@ -41,7 +41,7 @@ class Hist_Produto(models.Model):
     hora_alt = models.TimeField(auto_now_add=True)
     qtd = models.IntegerField()
     movimentacao = models.CharField(max_length=1) # Saida ou Entrada
-    carrinho = models.CharField(max_length=1)   # A para "Ativo" e I para "Inativo"
+    carrinho = models.CharField(max_length=1)   # A para "Ativo" e F para "Finalizado"
     usuario = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     produto = models.ForeignKey(Produto, on_delete=models.DO_NOTHING)
 
