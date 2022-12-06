@@ -27,7 +27,8 @@ class Produto(models.Model):
     qtd = models.IntegerField()
     valor = models.FloatField()
     endimg = models.ImageField(upload_to='Produto_img/%Y/%m/%d')
-    tamanho = models.ForeignKey(Tamanhos, on_delete=models.DO_NOTHING)
+    tamanho = models.ManyToManyField(Tamanhos)
+    # tamanho = models.ForeignKey(Tamanhos, on_delete=models.DO_NOTHING)
     categoria = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING)
     marca = models.ForeignKey(Marca, on_delete=models.DO_NOTHING)
 
@@ -40,6 +41,7 @@ class Hist_Produto(models.Model):
     data_alt = models.DateField(auto_now_add=True)
     hora_alt = models.TimeField(auto_now_add=True)
     qtd = models.IntegerField()
+    tamanho = models.CharField(max_length=2)
     movimentacao = models.CharField(max_length=1) # Saida ou Entrada
     carrinho = models.CharField(max_length=1)   # A para "Ativo" e F para "Finalizado"
     usuario = models.ForeignKey(User, on_delete=models.DO_NOTHING)

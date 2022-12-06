@@ -59,3 +59,8 @@ hr {
 .btn-toolbar {
   padding: 0;
 }
+
+.checado:checked + label{
+  background-color: #929fba;
+  color: black;
+}

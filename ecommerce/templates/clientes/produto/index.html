@@ -64,45 +64,16 @@
           <hr>
           <span>Tamanhos</span> <br> <br>
 
-
+          
           <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner d-flex justify-content-around">
+              {% for tamanho in tamanhos %}
               <div class="carousel-item active" role="group">
-                <button type="button" class="btn btn-outline-secondary" alt="First slide">36</button>
+                <input type="radio" class="checado btn btn-outline-secondary" id="{{tamanho.tamanhos}}" style="display: none;" name="tamanho"  value="{{tamanho.tamanhos}}"> 
+                <label for="{{tamanho.tamanhos}}" class="check btn btn-outline-secondary">{{tamanho.tamanhos}}</label>
               </div>
-              <div class="carousel-item active" role="group">
-                <button type="button" class="btn btn-outline-secondary" alt="First slide">37</button>
-              </div>
-              <div class="carousel-item active" role="group">
-                <button type="button" class="btn btn-outline-secondary" alt="First slide">38</button>
-              </div>
-              <div class="carousel-item active">
-                <button type="button" class="btn btn-outline-secondary" alt="Second slide">39</button>
-              </div>
-              <div class="carousel-item active">
-                <button type="button" class="btn btn-outline-secondary" alt="Third slide">40</button>
-              </div>
-              <div class="carousel-item active">
-                <button type="button" class="btn btn-outline-secondary" alt="Third slide">41</button>
-              </div>
-              <div class="carousel-item active">
-                <button type="button" class="btn btn-outline-secondary" alt="Third slide">42</button>
-              </div>
-              <div class="carousel-item active">
-                <button type="button" class="btn btn-outline-secondary" alt="Third slide">41</button>
-              </div>
-              <div class="carousel-item active">
-                <button type="button" class="btn btn-outline-secondary" alt="Third slide">42</button>
-              </div>
+              {% endfor %}
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
           </div>
           <a href="{% url 'comprar' produto.id %}"><button class="col-12 md-6 btn-comprar">Comprar</button> </a> <br> <br>
           <a href="{% url 'adicionaCart' produto.id %}"><button class="col-12 md-6 btn-sacola">Adicionar Sacola</button> </a>

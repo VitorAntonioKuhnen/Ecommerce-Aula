@@ -25,25 +25,30 @@ def dashboard(request):
 
 @login_required(login_url='login') 
 def estoque(request):
-    produtos = Produto.objects.all()
-    return render(request, 'admins/estoque/index.html', {'produtos': produtos})
+    if request.user.is_superuser:
+        produtos = Produto.objects.all()
+        return render(request, 'admins/estoque/index.html', {'produtos': produtos})
+    else:
+        return redirect('inicio')
+    
 
 @login_required(login_url='login')
 def carrinho(request):
     carrinhos = Carrinho.objects.filter(Q(usuario=request.user.id) & Q(status='A'))
     valor = 0
     produtos = []
-    print()
-    for carrinho in carrinhos:
-        for prod in carrinho.produto.all():  # Preciso percorrer minha lista de produtos para somar a quantidade
-            print(prod.id)
-            hist_prod = None
-            hist_prod = Hist_Produto.objects.get(usuario_id=request.user.id, produto_id=prod.id, carrinho='A')
-            produtos.append(hist_prod)
-            print('Quantidade')
-            print(hist_prod.valor_uni * hist_prod.qtd)
+    if carrinhos:
+        for carrinho in carrinhos:
+            for prod in carrinho.produto.all():  # Preciso percorrer minha lista de produtos para somar a quantidade
+                print(prod.id)
+                hist_prod = None
+                hist_prod = Hist_Produto.objects.get(usuario_id=request.user.id, produto_id=prod.id, carrinho='A')
+                print(hist_prod.id)
+                produtos.append(hist_prod)
+                print('Quantidade')
+                print(hist_prod.valor_uni * hist_prod.qtd)
 
-            valor += hist_prod.valor_uni * hist_prod.qtd  # Precisa ser ajustado
+                valor += hist_prod.valor_uni * hist_prod.qtd  # Precisa ser ajustado
 
         
     return render(request, 'clientes/carrinho/index.html', {'produtos': produtos, 'valor': '{:.2f}'.format(valor)})
@@ -54,7 +59,8 @@ def produto(request, id):
     categoria = Categoria.objects.raw(
         'select * from ecommerce_categoria limit 3')
     parcela = '{:.2f}'.format(produto.valor/12)
-    return render(request, 'clientes/produto/index.html', {'produto': produto, 'parcela': parcela, 'categoria': categoria})
+    tamanhos = produto.tamanho.all()
+    return render(request, 'clientes/produto/index.html', {'produto': produto, 'tamanhos':tamanhos, 'parcela': parcela, 'categoria': categoria})
 
 
 def categorias(request):
@@ -74,6 +80,8 @@ def buscar(request):
 
 @login_required(login_url='login')
 def adicionaCart(request, id):
+    tamanho = request.GET.get('tamanho')
+    print(tamanho)
     user = request.user.id
     cart = Carrinho.objects.filter(usuario_id=user, status='A')
     pega_Produto = Produto.objects.get(id=id)
@@ -120,7 +128,6 @@ def comprar(request, id):
 
 @login_required(login_url='login')
 def perfil(request):
-
     usuario = User.objects.get(id=request.user.id)
     print(usuario.first_name)
     if request.method == "POST":
@@ -154,14 +161,18 @@ def perfil(request):
     else:
         return render(request, 'clientes/perfil/index.html', {'usuario': usuario})
 
+@login_required(login_url='login')
 def sacs(request):
-    return render(request, 'admins/sacs/index.html', {'sacs':Sac.objects.all()})
+    if request.user.is_superuser:
+        return render(request, 'admins/sacs/index.html', {'sacs':Sac.objects.all()})   
+    else:
+        return redirect('inicio')
 
+@login_required(login_url='login')
 def finalizar(request):
     carrinhos = Carrinho.objects.filter(Q(usuario=request.user.id) & Q(status='A'))
     for carrinho in carrinhos:
         for prod in carrinho.produto.all():  # Preciso percorrer minha lista de produtos para somar a quantidade
-            print(prod.id)
             hist_prod = None
             hist_prod = Hist_Produto.objects.get(usuario_id=request.user.id, produto_id=prod.id, carrinho='A')
             produto = Produto.objects.get(id=hist_prod.produto.id)
@@ -169,4 +180,5 @@ def finalizar(request):
             hist_prod.carrinho = 'F'
             produto.save()
             hist_prod.save()
+        Carrinho.objects.get(id=carrinho.id).delete()
     return redirect('carrinho')    
