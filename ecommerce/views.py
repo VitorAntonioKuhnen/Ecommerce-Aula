@@ -182,3 +182,28 @@ def finalizar(request):
             hist_prod.save()
         Carrinho.objects.get(id=carrinho.id).delete()
     return redirect('carrinho')    
+
+def sac(request):
+    if request.method == 'POST':
+        nome = request.POST.get('nome').strip()
+        email = request.POST.get('email').strip()
+        comentario = request.POST.get('comentario').strip()
+        
+
+        if nome == '':
+            messages.error(request, 'Informe um Nome!')
+            print(messages)
+            return redirect('sac')
+        elif email == '':
+            messages.error(request, 'Informe um email!')
+            print(email)
+            return redirect('sac')
+        elif comentario == '':
+            messages.error(request, 'Adicione um Comentario!')
+            print(comentario)
+            return redirect('sac')
+        else:
+            Sac.objects.create(nome=nome, email=email, comentario=comentario, status = 'A')        
+            return redirect('sac')
+    else:    
+        return render(request, 'clientes/sac/index.html')   

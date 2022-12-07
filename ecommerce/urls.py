@@ -14,4 +14,5 @@ urlpatterns = [
     path('dashboard/sacs/', views.sacs, name='sacs'),
     path('comprar/<int:id>/', views.comprar, name='comprar'),
     path('finalizar/', views.finalizar, name='finalizar'),
+    path('sac/', views.sac, name='sac')
 ]

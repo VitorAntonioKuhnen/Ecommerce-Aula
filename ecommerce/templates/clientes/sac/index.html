@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}SAC{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/sac/style.css' %}">
+{% endblock %}
+
+{% block conteudo %}
+<div class="col"></div>
+<div class="form-container">
+    <div class="form-btn">
+        <div id="titulo">SAC</div>
+        <hr id="Indicador">
+        <div id="descricao">Fale agora com o nosso suporte</div>
+    </div>
+    <form id="SacForm" style="transform:translateX(300px);" method="POST"> {% csrf_token %}
+        <input name="nome" type="text" placeholder="Nome">
+        <input name="email" type="email" placeholder="E-mail">
+        <input name="comentario" type="text" id="comentário" placeholder="Faça um Comentário">
+        {% if messages %}
+        {% for message in messages %}
+            <div id="mensagem" class="msgErro">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% endif %}
+        <button type="submit" class="btn">Enviar</button>
+    </form>
+    <div>
+        {% endblock %}
