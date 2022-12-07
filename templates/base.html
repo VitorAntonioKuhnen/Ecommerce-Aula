@@ -29,7 +29,7 @@
                         <li><a href="{% url 'inicio' %}">Home</a></li>
                         <li><a href="{% url 'categorias' %}">Categorias</a></li>
                         <li><a href="">Sobre</a></li>
-                        <li><a href="">Contatos</a></li>
+                        <li><a href="{% url 'sac' %}">SAC</a></li>
                         {% if user.id is NULL %}
                             <li><a href="{% url 'login' %}">Login/Cadastro</a></li>
                         {% else %}
